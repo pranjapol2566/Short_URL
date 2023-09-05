@@ -9,9 +9,9 @@
 <body>
     <div class="container">
         <h1 style="text-align: center;">Short URL</h1>
-        <form action="" method="POST" style="display: block; text-align: center;" class="my-4 form-inline">
-            <label for="FullUrl"></label>
-            <input required placeholder="Url" type="url" name="FullUrl" id="FullUrl">
+        <form action="/shortUrls" method="POST" style="display: block; text-align: center;" class="my-4 form-inline">
+            <label for="fullUrl"></label>
+            <input required placeholder="Url" type="url" name="fullUrl" id="fullUrl">
             <button class="btn btn-success" type="submit">Submit</button>
         </form>
         <table class="table table-striped table-responsive">
@@ -23,11 +23,13 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td><a href="https://www.synerry.com">https://www.synerry.com</a></td>
-                    <td><a href="/123333">1324</a></td>
-                    <td>10</td>
-                </tr>
+                <% shortUrls.forEach(shortUrl => { %>
+                    <tr>
+                        <td><a href="<%= shortUrl.full %>"><%= shortUrl.full %></a></td>
+                        <td><a href="<%= shortUrl.short %>">http://localhost:5000/<%= shortUrl.short %></a></td>
+                        <td><%= shortUrl.clicks %></td>
+                    </tr>    
+                <% }) %>
             </tbody>
         </table>
     </div>
