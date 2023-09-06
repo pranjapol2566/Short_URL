@@ -1,34 +1,42 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const ShortUrl = require('./models/shortUrl')
+const qrcode = require('qrcode')
 const app = express()
 
 mongoose.connect('mongodb+srv://admin:1234@cluster0.meesrfk.mongodb.net/', {
     useNewUrlParser: true, useUnifiedTopology: true
 })
 
-app.set('view engine','ejs')
+app.set('view engine', 'ejs')
 app.use(express.urlencoded({ extended: false }))
 
 
-app.get('/', async (req, res) => { 
+app.get('/', async (req, res) => {
     const shortUrls = await ShortUrl.find()
-    res.render('index', { shortUrls: shortUrls})
+    res.render('index', { shortUrls: shortUrls })
 })
 
 app.post('/shortUrls', async (req, res) => {
-   await ShortUrl.create({ full: req.body.fullUrl})
-   res.redirect('/')
+    await ShortUrl.create({ 
+        full: req.body.fullUrl, 
+        qr: req.body.fullUrl 
+    })
+
+    res.redirect('/')
 })
 
 app.get('/:id', async (req, res) => {
-  const shortUrl = await ShortUrl.findOne({ short: req.params.id})
-  if(shortUrl == null) return res.sendStatus(404)
+    const shortUrl = await ShortUrl.findOne({ short: req.params.id })
 
-  shortUrl.clicks++
-  shortUrl.save()
+    if (shortUrl == null) return res.sendStatus(404)
 
-  res.redirect(shortUrl.full)
+
+
+    shortUrl.clicks++
+    shortUrl.save()
+
+    res.redirect(shortUrl.full)
 })
 
 app.listen(process.env.PORT || 5000);
