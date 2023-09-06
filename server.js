@@ -1,4 +1,5 @@
 const express = require('express')
+const path = require('path')
 const mongoose = require('mongoose')
 const ShortUrl = require('./models/shortUrl')
 const qrcode = require('qrcode')
@@ -8,8 +9,11 @@ mongoose.connect('mongodb+srv://admin:1234@cluster0.meesrfk.mongodb.net/', {
     useNewUrlParser: true, useUnifiedTopology: true
 })
 
+
 app.set('view engine', 'ejs')
 app.use(express.urlencoded({ extended: false }))
+
+app.use(express.static('public'));
 
 
 app.get('/', async (req, res) => {
@@ -60,16 +64,16 @@ app.get('/generate/:id', async (req, res) => {
     })
 })
 
-
-// app.post("/scan", async (req, res) => {
-//     const url = "https://www.google.com/";
-
-    
-//     qrcode.toDataURL(url, (err, src) => {
-//         if (err) res.send("Error occured");
-      
-//         res.render("scan", { src });
-//     });
-// });
+app.post('/delete/:id', async (req, res) => {
+    const idToDelete = req.params.id;
+    try {
+        // ลบรายการโดยใช้ _id ของเอกสาร
+        await ShortUrl.findByIdAndRemove(idToDelete);
+        res.redirect('/');
+    } catch (error) {
+        console.error('Error deleting short URL:', error);
+        res.sendStatus(500);
+    }
+})
 
 app.listen(process.env.PORT || 5000);
