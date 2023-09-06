@@ -17,10 +17,6 @@ const shortUrlSchema = new mongoose.Schema({
         required: true,
         default: 0
     },
-    qr: {
-        type: String,
-        required: true,
-    }
 })
 
 module.exports = mongoose.model('ShortUrl' , shortUrlSchema)

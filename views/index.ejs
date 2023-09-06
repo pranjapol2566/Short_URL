@@ -30,6 +30,7 @@
                         <td><a href="<%= shortUrl.full %>"><%= shortUrl.full %></a></td>
                         <td><a href="<%= shortUrl.short %>">http://localhost:5000/<%= shortUrl.short %></a></td>
                         <td><%= shortUrl.clicks %></td>
+                        <td><a href="/generate/<%= shortUrl.short %>">Generate QR</a></td>
                     </tr>   
                 <% }) %>
             </tbody>
