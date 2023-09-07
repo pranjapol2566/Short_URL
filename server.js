@@ -50,7 +50,7 @@ app.get('/generate/:id', async (req, res) => {
     if (shortUrl == null) return res.sendStatus(404)
 
     // สร้าง QR code จาก shortUrl.full
-    qrcode.toDataURL(shortUrl.Short_Url, (err, qrCodeData) => {
+    qrcode.toDataURL(shortUrl.Full_Url, (err, qrCodeData) => {
         if (err) {
             console.error(err)
             return res.sendStatus(500)
