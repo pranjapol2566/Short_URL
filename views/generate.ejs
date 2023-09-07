@@ -13,7 +13,9 @@
         <img src="<%= shortUrl.qrCode %>" alt="QR Code Image">
         <p>Scan the QR Code to access data!</p>
         <!-- <a href="/"><button type="button" class="btn btn-primary">Back</button></a> -->
-        
+        <a href="https://www.facebook.com/sharer/sharer.php?u=<%= shortUrl.full %>" target="_blank">Share on Facebook</a>
+        <a href="https://twitter.com/intent/tweet?url=<%= shortUrl.full %>" target="_blank">Share on Twitter</a>
+        <a href="https://www.linkedin.com/shareArticle?url=<%= shortUrl.full %>" target="_blank">Share on LinkedIn</a>
         <a href="/" class="btn btn-primary">Back to Home</a>
     </div>
 
