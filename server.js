@@ -25,7 +25,7 @@ app.get('/', async (req, res) => {
 app.post('/shortUrls', async (req, res) => {
 
     await ShortUrl.create({ 
-        full: req.body.fullUrl, 
+        Full_Url: req.body.fullUrl, 
     })
 
     res.redirect('/')
@@ -33,7 +33,7 @@ app.post('/shortUrls', async (req, res) => {
 
 
 app.get('/:id', async (req, res) => {
-    const shortUrl = await ShortUrl.findOne({ short: req.params.id })
+    const shortUrl = await ShortUrl.findOne({ Short_Url: req.params.id })
 
     if (shortUrl == null) return res.sendStatus(404)
 
@@ -41,16 +41,16 @@ app.get('/:id', async (req, res) => {
 
     shortUrl.clicks++
     shortUrl.save()
-    res.redirect(shortUrl.full)
+    res.redirect(shortUrl.Full_Url)
 })
 
 app.get('/generate/:id', async (req, res) => {
-    const shortUrl = await ShortUrl.findOne({ short: req.params.id })
+    const shortUrl = await ShortUrl.findOne({ Short_Url: req.params.id })
 
     if (shortUrl == null) return res.sendStatus(404)
 
     // สร้าง QR code จาก shortUrl.full
-    qrcode.toDataURL(shortUrl.full, (err, qrCodeData) => {
+    qrcode.toDataURL(shortUrl.Short_Url, (err, qrCodeData) => {
         if (err) {
             console.error(err)
             return res.sendStatus(500)

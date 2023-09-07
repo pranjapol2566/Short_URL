@@ -6,6 +6,21 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" href="/style.css">
     <title>Document</title>
+    <script>
+        function confirmDelete(id) {
+            const confirmDelete = confirm("คุณต้องการลบรายการนี้ใช่หรือไม่?");
+            if (confirmDelete) {
+                // ถ้าผู้ใช้ยืนยันการลบ
+                // ส่งคำขอลบไปยัง URL ใน server.js
+                const url = `/delete/${id}`;
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = url;
+                document.body.appendChild(form);
+                form.submit();
+            }
+        }
+    </script>
 </head>
 <body>
     <div class="container">
@@ -19,6 +34,7 @@
         <table class="table table-striped table-responsive">
             <thead>
                 <tr>
+                    <th>ID</th>
                     <th>Full URL</th>
                     <th>Short URL</th>
                     <th>Clicks</th>
@@ -27,20 +43,19 @@
                 </tr>
             </thead>
             <tbody>
-                <% shortUrls.forEach(shortUrl => { %>
+                <% shortUrls.forEach((shortUrl,index) => { %>
                     <tr>
-                        <td><a href="<%= shortUrl.full %>"><%= shortUrl.full %></a></td>
-                        <td><a href="<%= shortUrl.short %>">http://localhost:5000/<%= shortUrl.short %></a></td>
+                        <td><%= index + 1 %></td>
+                        <td><a href="<%= shortUrl.Full_Url %>"><%= shortUrl.Full_Url %></a></td>
+                        <td><a href="<%= shortUrl.Short_Url %>">http://localhost:5000/<%= shortUrl.Short_Url %></a></td>
                         <td><%= shortUrl.clicks %></td>
                         <td>
-                            <form action="/generate/<%= shortUrl.short %>" method="GET">
+                            <form action="/generate/<%= shortUrl.Short_Url %>" method="GET">
                                 <button class="btn btn-primary" type="submit">Generate QR</button>
                             </form>
                         </td>
                         <td>
-                            <form action="/delete/<%= shortUrl._id %>" method="POST">
-                                <button class="btn btn-danger" type="submit">Delete</button>
-                            </form>
+                            <button class="btn btn-danger" onclick="confirmDelete('<%= shortUrl._id %>')">Delete</button>
                         </td>
                     </tr>   
                 <% }) %>

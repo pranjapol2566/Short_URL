@@ -3,11 +3,11 @@ const shortId = require('shortid')
 
 
 const shortUrlSchema = new mongoose.Schema({
-    full: {
+    Full_Url: {
         type: String,
         required: true
     },
-    short: {
+    Short_Url: {
         type: String,
         required: true,
         default: shortId.generate
