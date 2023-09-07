@@ -46,8 +46,8 @@
                 <% shortUrls.forEach((shortUrl,index) => { %>
                     <tr>
                         <td><%= index + 1 %></td>
-                        <td><a href="<%= shortUrl.Full_Url %>"><%= shortUrl.Full_Url %></a></td>
-                        <td><a href="<%= shortUrl.Short_Url %>">http://localhost:5000/<%= shortUrl.Short_Url %></a></td>
+                        <td><a href="<%= shortUrl.Full_Url %>" target="_blank"><%= shortUrl.Full_Url %></a></td>
+                        <td><a href="<%= shortUrl.Short_Url %>" target="_blank">https://short-url-ciqa.onrender.com/<%= shortUrl.Short_Url %></a></td>
                         <td><%= shortUrl.clicks %></td>
                         <td>
                             <form action="/generate/<%= shortUrl.Short_Url %>" method="GET">
