@@ -4,8 +4,9 @@ const mongoose = require('mongoose')
 const ShortUrl = require('./models/shortUrl')
 const qrcode = require('qrcode')
 const app = express()
+require('dotenv').config();
 
-mongoose.connect('mongodb+srv://admin:1234@cluster0.meesrfk.mongodb.net/', {
+mongoose.connect(process.env.MONGODB_CONNECT_URI, {
     useNewUrlParser: true, useUnifiedTopology: true
 })
 
@@ -76,4 +77,8 @@ app.post('/delete/:id', async (req, res) => {
     }
 })
 
-app.listen(process.env.PORT || 5000);
+const PORT = process.env.PORT
+
+app.listen(PORT,() =>{
+    console.log("Server is running on port" + PORT)
+})
