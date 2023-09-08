@@ -53,7 +53,9 @@
                         <td><%= shortUrl.clicks %></td>
                         <td>
                             <form action="/generate/<%= shortUrl.Short_Url %>" method="GET">
-                                <button class="btn btn-primary" type="submit">Generate QR</button>
+                                <button class="btn btn-primary" type="submit">
+                                    <i class="fas fa-qrcode"></i> Generate QR
+                                </button>
                             </form>
                         </td>
                         <td>
@@ -62,7 +64,9 @@
                             </a>
                         </td>
                         <td>
-                            <button class="btn btn-danger" onclick="confirmDelete('<%= shortUrl._id %>')">Delete</button>
+                            <button class="btn btn-danger" onclick="confirmDelete('<%= shortUrl._id %>')">
+                                <i class="fas fa-trash"></i> Delete
+                            </button>                            
                         </td>
                     </tr>   
                 <% }) %>
