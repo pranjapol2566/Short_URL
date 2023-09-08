@@ -4,4 +4,6 @@
 2.เพิ่มไฟล์ที่ชื่อว่า .env แล้วพิมพ์ตัวแปรตามนี้<br>
     > MONGODB_CONNECT_URI= และ<br>
     > PORT=5000 <br>
+3.ไปที่ไฟล์ index.ejs บรรทัดที่ 60 ให้เปลี่ยนตามนี้ `<a href="https://www.facebook.com/sharer/sharer.php?u=<%= shortUrl.Full_Url %>" target="_blank">`
+
 3.ตอนรันโค้ด ให้ใช้คำสั่ง node server.js หรือ npm run devStart
