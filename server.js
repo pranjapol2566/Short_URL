@@ -37,9 +37,8 @@ app.get('/:id', async (req, res) => {
 
     if (shortUrl == null) return res.sendStatus(404)
 
-    const ipAddress = req.ip
-
-    shortUrl.ipAddress = ipAddress
+    const ipAddress = req.ip || req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    shortUrl.ipAddress = ipAddress;
 
     shortUrl.clicks++
     shortUrl.save()
